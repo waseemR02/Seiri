@@ -1,5 +1,6 @@
 import csv
 from openpyxl import Workbook
+from openpyxl.styles import Alignment
 from loguru import logger
 import sys
 
@@ -21,17 +22,45 @@ class Transform:
             
         # Intialize worksheets
         self.wb = Workbook()
+        self.sheets= []
         del self.wb["Sheet"]
         
         # default langs for now
-        self.lang = ["en", "en", "es", "fr", "it"]
+        self.langs = ["en", "de", "es", "fr", "it"]
+
+    def __init__sheets(self) -> None:
+        # Create worksheets
+        for lang in self.langs:
+            self.sheets.append(self.wb.create_sheet(lang))
+            self.logger.info(f"Created sheet {lang}")
+        
+        for sheet in self.sheets:
+            sheet.append(["Key", "Value"])
+        
+        self.logger.info("Successfully initialized Sheets")
 
     def csv_to_xlsx(self, in_file: str, out_file: str) -> None:
-        Listed_csv= csv.reader(open(in_file, "r"), delimiter=';')
+
+        Listed_csv= csv.reader(open(in_file, "r", newline=''), delimiter=';')
         
         # Checks 
-        for row in Listed_csv:
-            self.logger.info(row[2] if len(row) == 10 else "")
+        header_list = Listed_csv.__next__()
+        
+        if header_list[4] != "en":
+            self.logger.error("'en' Spell check error!!")
+        else:
+            self.logger.info("'en' Spell check done")
+
+        self.__init__sheets()
+
+        # for row in Listed_csv:
+        #     # print(row)
+        #     print(row if len(row) == 10 else "")
+
+
+        # Save Workbook
+        self.wb.save(out_file)
+        self.logger.info(f"Saving workbook to {out_file}")
 
 
 if __name__ == "__main__":
