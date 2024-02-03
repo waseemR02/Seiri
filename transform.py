@@ -1,4 +1,6 @@
 import csv
+from openpyxl import Workbook
+from loguru import logger
 
 class Transform:
     """ 
@@ -7,11 +9,25 @@ class Transform:
             2. xlsx --> csv
     """
     def __init__(self) -> None:
-        pass
+       # Initialize logger
+
+        self.logger = logger
+        self.logger.add("seiri.log", level="ERROR")
+
+
+        # Intialize worksheets
+        self.wb = Workbook()
+        del self.wb["Sheet"]
+        
+        # default langs for now
+        self.lang = ["en", "en", "es", "fr", "it"]
 
     def csv_to_xlsx(self, in_file: str, out_file: str) -> None:
-        Listed_dic= list(csv.DictReader(open(in_file, 'r')))
-        print(json.dumps(Listed_dic, indent=4))
+        Listed_csv= csv.reader(open(in_file, "r"), delimiter=';')
+        
+        # Checks 
+        for row in Listed_csv:
+            logger.info(row[2] if len(row) == 10 else "")
 
 
 if __name__ == "__main__":
