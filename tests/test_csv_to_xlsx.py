@@ -10,7 +10,7 @@ def test_csv_to_xlsx(tmp_path):
     transformer = Transform()
 
     # Call the csv_to_xlsx method
-    transformer.csv_to_xlsx("input.csv", str(output_file))
+    transformer.csv_to_xlsx("tests/Sample.csv", str(output_file))
 
     # Check if the output file exists
     assert output_file.exists()
