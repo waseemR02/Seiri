@@ -56,7 +56,9 @@ class Transform:
         # for row in Listed_csv:
         #     # print(row)
         #     print(row if len(row) == 10 else "")
-
+        for row in Listed_csv:
+            if len(row): # Don't consider empty lines
+                self.sheets[0].append([row[2], row[4]])
 
         # Save Workbook
         self.wb.save(out_file)
