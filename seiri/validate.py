@@ -12,13 +12,13 @@ class Validate:
         self.logger = logger
         self.logger.remove()
         self.logger.add(
-            sink="seiri.log",
+            sink="seiri-error.log",
             level="ERROR",
-            format="<green>{time:MMMM D, YYYY > HH:mm:ss}</green> | <level>{level: <8}</level> | <level>{message}</level>",
+            format="<white>{time:MMMM D, YYYY > HH:mm:ss}</white> | <level>{level: <8}</level> | <level>{message}</level>",
         )
         self.logger.add(
             sink=sys.stdout,
-            format="<green>{time:MMMM D, YYYY > HH:mm:ss}</green> | <level>{level: <8}</level> | <level>{message}</level>",
+            format="<white>{time:MMMM D, YYYY > HH:mm:ss}</white> | <level>{level: <8}</level> | <level>{message}</level>",
         )
 
     def validate(self, in_xlsx: str, against_xlsx) -> bool:

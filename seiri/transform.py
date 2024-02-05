@@ -15,10 +15,18 @@ class Transform:
         # Initialize logger for default logging
         self.logger = logger
         self.logger.remove()
-        self.logger.add("seiri.log", level="ERROR")
+        self.logger.add(
+            sink="seiri-error.log",
+            level="ERROR",
+            format="<white>{time:MMMM D, YYYY > HH:mm:ss}</white> | <level>{level: <8}</level> | <level>{message}</level>",
+        )
 
         if verbose:
-            self.logger.add(sys.stderr, level="DEBUG")
+            self.logger.add(
+                sink=sys.stdout,
+                level="DEBUG",
+                format="<white>{time:MMMM D, YYYY > HH:mm:ss}</white> | <level>{level: <8}</level> | <level>{message}</level>",
+            )
 
         # Intialize worksheets
         self.wb = Workbook()
@@ -37,7 +45,7 @@ class Transform:
         for sheet in self.sheets:
             sheet.append(["Key", "Value"])
 
-        self.logger.info("Successfully initialized Sheets")
+        self.logger.success("Successfully initialized Sheets")
 
     def csv_to_xlsx(self, in_file: str, out_file: str) -> None:
         Listed_csv = csv.reader(open(in_file, "r", newline=""), delimiter=";")
@@ -48,7 +56,7 @@ class Transform:
         if header_list[4] != "en":
             self.logger.error("'en' Spell check error!!")
         else:
-            self.logger.info("'en' Spell check done")
+            self.logger.success("'en' Spell check done")
 
         self.__init__sheets()
 
