@@ -8,8 +8,10 @@ pip install -r requirements.txt
 ```
 
 ## Usage
-This tool is written as library for future adaption to gui
+This tool is written as library for future adaptation to gui
+
 But each class file can be run as a separate script
+**Transform**
 ```
 usage: transform.py [-h] [--cx CX] [-o OUTPUT] [--xc XC] [-v]
 
@@ -22,12 +24,29 @@ options:
   -v, --verbose
 ```
 
-**Example**
+**Validate**
+```
+usage: validate.py [-h] [--against AGAINST] in_xlsx
+
+positional arguments:
+  in_xlsx            path to xlsx to validate
+
+options:
+  -h, --help         show this help message and exit
+  --against AGAINST  path to xlsx to validate against
+```
+
+**Example:**
 
 ```
 python seiri/transform.py --cx tests/Sample.csv -o sample.xlsx --verbose
 ```
 ![csv_to_xlsx](https://github.com/waseemR02/seiri/assets/98299006/2443b91d-643e-4a5e-bae5-85eeb2abea94)
+-----------------
+```
+python seiri/validate.py tests/Delivered.xlsx
+```
+![validation](https://github.com/waseemR02/seiri/assets/98299006/e47adcf2-cc07-4379-ba20-72016fc1fed3)
 
 ### Testing
 Run the following
@@ -38,5 +57,5 @@ pytest -v
 
 ## Task
 - [x] Convert csv to xlsx
-- [ ] Validating given Excel with rules
+- [x] Validating given Excel with rules
 - [ ] Converting Excel to csv again
