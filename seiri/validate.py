@@ -108,5 +108,23 @@ class Validate:
 
 
 if __name__ == "__main__":
+    import argparse
+
+    ap = argparse.ArgumentParser()
+    # get the first arg for in_xlsx without any flag
+    ap.add_argument(
+        "in_xlsx",
+        type=str,
+        default="tests/Delivered.xlsx",
+        help="path to xlsx to validate",
+    )
+    ap.add_argument(
+        "--against",
+        type=str,
+        default="tests/Sample.xlsx",
+        help="path to xlsx to validate against",
+    )
+    args = vars(ap.parse_args())
+
     validate = Validate()
-    validate.validate("Delivered.xlsx", "sample.xlsx")
+    validate.validate(args["in_xlsx"], args["against"])
