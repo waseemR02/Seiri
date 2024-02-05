@@ -18,14 +18,14 @@ class Transform:
         self.logger.add(
             sink="seiri-error.log",
             level="ERROR",
-            format="<white>{time:MMMM D, YYYY > HH:mm:ss}</white> | <level>{level: <8}</level> | <level>{message}</level>",
+            format="<white>{time:MMMM D, YYYY > HH:mm:ss}</white> | <level>{level: <8}</level> | <level>Transform</level> | <level>{message}</level>",
         )
 
         if verbose:
             self.logger.add(
                 sink=sys.stdout,
                 level="DEBUG",
-                format="<white>{time:MMMM D, YYYY > HH:mm:ss}</white> | <level>{level: <8}</level> | <level>{message}</level>",
+                format="<white>{time:MMMM D, YYYY > HH:mm:ss}</white> | <level>{level: <8}</level> | <level>Transform</level> | <level>{message}</level>",
             )
 
         # Intialize worksheets
