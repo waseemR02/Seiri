@@ -1,6 +1,6 @@
-import pytest
 import openpyxl
 from seiri.transform import Transform
+
 
 def test_csv_to_xlsx(tmp_path):
     # Create a temporary output file path
@@ -33,11 +33,13 @@ def test_csv_to_xlsx(tmp_path):
         assert sample_sheet.max_column == sheet.max_column
         for row in range(1, sample_sheet.max_row + 1):
             for col in range(1, sample_sheet.max_column + 1):
-                assert sample_sheet.cell(row=row, column=col).value == sheet.cell(row=row, column=col).value
+                assert (
+                    sample_sheet.cell(row=row, column=col).value
+                    == sheet.cell(row=row, column=col).value
+                )
 
     # Close the sample workbook
     sample_wb.close()
-
 
     # Close the workbook
     wb.close()
