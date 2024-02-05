@@ -27,7 +27,7 @@ options:
 ```
 python seiri/transform.py --cx tests/Sample.csv -o sample.xlsx --verbose
 ```
-![csv_to_xlsx](https://github.com/waseemR02/seiri/assets/98299006/c82f11f1-d3e1-4c41-9595-e06d6e2facd2)
+![csv_to_xlsx](https://github.com/waseemR02/seiri/assets/98299006/2443b91d-643e-4a5e-bae5-85eeb2abea94)
 
 ### Testing
 Run the following
