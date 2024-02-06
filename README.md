@@ -44,7 +44,7 @@ python seiri/transform.py --cx tests/Sample.csv -o sample.xlsx --verbose
 ![csv_to_xlsx](https://github.com/waseemR02/seiri/assets/98299006/2443b91d-643e-4a5e-bae5-85eeb2abea94)
 -----------------
 ```
-python seiri/validate.py tests/Delivered.xlsx
+python seiri/validate.py tests/Delivered_correct.xlsx
 ```
 ![validation](https://github.com/waseemR02/seiri/assets/98299006/e47adcf2-cc07-4379-ba20-72016fc1fed3)
 
