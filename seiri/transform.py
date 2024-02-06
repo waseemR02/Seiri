@@ -11,12 +11,12 @@ class Transform:
         2. xlsx --> csv
     """
 
-    def __init__(self, verbose: bool = False) -> None:
+    def __init__(self, verbose: bool = False, log: str = "seiri-error.log") -> None:
         # Initialize logger for default logging
         self.logger = logger
         self.logger.remove()
         self.logger.add(
-            sink="seiri-error.log",
+            sink=log,
             level="ERROR",
             format="<white>{time:MMMM D, YYYY > HH:mm:ss}</white> | <level>{level: <8}</level> | <level>Transform</level> | <level>{message}</level>",
         )
@@ -78,11 +78,17 @@ if __name__ == "__main__":
     ap.add_argument(
         "--xc", type=str, default="tests/Sample.xlsx", help="Convert xlsx to csv"
     )
+    ap.add_argument(
+        "--log",
+        type=str,
+        default="seiri-error.log",
+        help="path to log file",
+    )
     ap.add_argument("-v", "--verbose", action="store_true")
 
     args = vars(ap.parse_args())
 
-    transformer = Transform(verbose=args["verbose"])
+    transformer = Transform(verbose=args["verbose"], log=args["log"])
 
     if args["cx"]:
         # csv to xlsx

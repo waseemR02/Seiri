@@ -9,12 +9,12 @@ class Validate:
     Validate checks given xlsx against given rules
     """
 
-    def __init__(self) -> None:
+    def __init__(self, log: str = "seiri-error.log") -> None:
         # Initialize logger with default settings
         self.logger = logger
         self.logger.remove()
         self.logger.add(
-            sink="seiri-error.log",
+            sink=log,
             level="ERROR",
             format="<white>{time:MMMM D, YYYY > HH:mm:ss}</white> | <level>{level: <8}</level> | <level>Validate</level> | <level>{message}</level>",
         )
@@ -183,7 +183,15 @@ if __name__ == "__main__":
         default="tests/Sample.xlsx",
         help="path to xlsx to validate against",
     )
+
+    ap.add_argument(
+        "--log",
+        type=str,
+        default="seiri-error.log",
+        help="path to log file",
+    )
+
     args = vars(ap.parse_args())
 
-    validate = Validate()
+    validate = Validate(args["log"])
     validate.validate(args["in_xlsx"], args["against"])
