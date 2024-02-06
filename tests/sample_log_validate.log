@@ -1,5 +1,0 @@
-February 6, 2024 > 18:58:18 | ERROR    | Validate | Row count mismatch in de sheet
-February 6, 2024 > 18:58:18 | ERROR    | Validate | Mismatched value in it sheet at row 6. Expected: lbl_Reserved, Actual: label_Expert_List
-February 6, 2024 > 18:58:18 | ERROR    | Validate | Empty cell in de sheet at row 7
-February 6, 2024 > 18:58:18 | ERROR    | Validate | Mismatched value in it sheet at row 7. Expected: label_Expert_List, Actual: lbl_Reserved
-February 6, 2024 > 18:58:18 | ERROR    | Validate | Duplicate value 'df' found in de sheet
