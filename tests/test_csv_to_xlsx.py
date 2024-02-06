@@ -6,8 +6,11 @@ def test_csv_to_xlsx(tmp_path):
     # Create a temporary output file path
     output_file = tmp_path / "output.xlsx"
 
+    # Create a temporary log file path
+    log_file = tmp_path / "seiri-error.log"
+
     # Create an instance of Transform
-    transformer = Transform()
+    transformer = Transform(log=str(log_file))
 
     # Call the csv_to_xlsx method
     transformer.csv_to_xlsx("tests/Sample.csv", str(output_file))
@@ -40,6 +43,9 @@ def test_csv_to_xlsx(tmp_path):
 
     # Close the sample workbook
     sample_wb.close()
+
+    # Check if the log file is created
+    assert log_file.exists()
 
     # Close the workbook
     wb.close()
