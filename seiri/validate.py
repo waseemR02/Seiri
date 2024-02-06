@@ -27,13 +27,16 @@ class Validate:
         """
         Validate checks given xlsx against given rules
         """
+        # Return True if all guards pass
+        ret = True
+
         if not os.path.exists(in_xlsx):
             self.logger.error(f"Could not find {in_xlsx}")
-            return False
+            ret = False
 
         if not os.path.exists(against_xlsx):
             self.logger.error(f"Could not find {against_xlsx}")
-            return False
+            ret = False
 
         self.logger.success(f"Found {in_xlsx} and {against_xlsx}")
         self.logger.info(f"Validating {in_xlsx} against {against_xlsx}")
@@ -48,7 +51,7 @@ class Validate:
         self.logger.info(f"Checking row count against {against_xlsx} in en sheet")
         if in_wb["en"].max_row != against_wb["en"].max_row:
             self.logger.error("Row count mismatch in en sheet")
-            return False
+            ret = False
         else:
             self.logger.success("Row count match in en sheet")
 
@@ -64,7 +67,7 @@ class Validate:
                 self.logger.error(
                     f"Key mismatch in en sheet at row {row}. Expected: {against_wb['en'].cell(row=row, column=1).value}, Actual: {in_wb['en'].cell(row=row, column=1).value}"
                 )
-                return False
+                ret = False
             if (
                 in_wb["en"].cell(row=row, column=2).value
                 != against_wb["en"].cell(row=row, column=2).value
@@ -72,7 +75,7 @@ class Validate:
                 self.logger.error(
                     f"Value mismatch in en sheet at row {row}. Expected: {against_wb['en'].cell(row=row, column=2).value}, Actual: {in_wb['en'].cell(row=row, column=2).value}"
                 )
-                return False
+                ret = False
 
         self.logger.success("Key and Value order match in en sheet")
         self.logger.success(f"Validation successful against {against_xlsx}")
@@ -83,7 +86,7 @@ class Validate:
         for sheet in in_wb.sheetnames:
             if in_wb[sheet].max_row != in_wb["en"].max_row:
                 self.logger.error(f"Row count mismatch in {sheet} sheet")
-                return False
+                ret = False
             else:
                 self.logger.success(f"Row count match in {sheet} sheet")
 
@@ -95,11 +98,17 @@ class Validate:
             for sheet in in_wb.sheetnames:
                 if sheet == "en":
                     continue
+
+                # handle when cell is empty
+                if in_wb[sheet].cell(row=row, column=1).value is None:
+                    self.logger.error(f"Empty cell in {sheet} sheet at row {row}")
+                    continue
+
                 if key not in in_wb[sheet].cell(row=row, column=1).value:
                     self.logger.error(
                         f"Mismatched value in {sheet} sheet at row {row}. Expected: {key}, Actual: {in_wb[sheet].cell(row=row, column=1).value}"
                     )
-                    return False
+                    ret = False
         self.logger.success(
             "Key found in all sheets and the order is same across all sheets"
         )
@@ -114,7 +123,7 @@ class Validate:
                     self.logger.error(
                         f"Empty value found in {sheet} sheet at row {row}"
                     )
-                    return False
+                    ret = False
         self.logger.success("Value Column is not empty in all sheets - 'en'")
 
         # 6. Check if the text in value column in all sheets is unique
@@ -127,7 +136,7 @@ class Validate:
                     self.logger.error(
                         f"Duplicate value '{value}' found in {sheet} sheet"
                     )
-                    return False
+                    ret = False
                 unique_values.add(value)
         self.logger.success("Value Column is unique in all sheets")
 
@@ -137,6 +146,10 @@ class Validate:
             if sheet == "en":
                 continue
             for row in range(1, in_wb[sheet].max_row + 1):
+                # When the cell is empty
+                if in_wb[sheet].cell(row=row, column=2).value is None:
+                    continue
+
                 if len(in_wb[sheet].cell(row=row, column=2).value) > len(
                     in_wb["en"].cell(row=row, column=2).value
                 ):
@@ -145,12 +158,12 @@ class Validate:
                     self.logger.error(
                         f"Length({value})={len(value)} in '{sheet}' sheet at row {row} is greater than length({en_value})={len(en_value)} in 'en' sheet"
                     )
-                    return False
+                    ret = False
         self.logger.success("Value Column is less than en value in all sheets")
 
         self.logger.success(f"Validation successful for {in_xlsx}")
 
-        return True
+        return ret
 
 
 if __name__ == "__main__":
