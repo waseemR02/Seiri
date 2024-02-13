@@ -42,9 +42,7 @@ jobs:
           coverage report -m
             coverage html -d ${{ matrix.os }}-${{ matrix.python-version }}
 
-      - name: Setup Pages
-        if: github.ref == 'refs/heads/main'
-        uses: actions/configure-pages@v4
+
 
       - name: Upload Page Artifacts
         uses: actions/upload-artifact@v3
@@ -64,40 +62,36 @@ jobs:
       - name: Merge Artifacts
         uses: actions/download-artifact@v3
         with:
-          path: ./artifacts
+          path: ./coverage
 
-      - name: Display structure of downloaded files
-        run: ls -R
+      - name: Setup Pages
+        if: github.ref == 'refs/heads/main'
+        uses: actions/configure-pages@v4
 
-      # - name: Upload Artifacts
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: artifacts
-      #     path: ./artifacts
+      - name: Upload page Artifacts
+        uses: actions/upload-page-artifact@v2
+        with:
+          name: artifact
+          path: ./coverage
 
-  # deploy:
-  #   needs: main
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       python-version: ["3.9", "3.10", "3.11", "3.12"]
-  #       os: [ubuntu-latest, macOS-latest, windows-latest]
+  deploy:
+    needs: main
+    runs-on: ubuntu-latest
 
-  #   permissions:
-  #     pages: write
-  #     id-token: write
+    permissions:
+      pages: write
+      id-token: write
 
-  #   environment:
-  #     name: github-pages
-  #     url: ${{ steps.deployment.outputs.page_url }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
-  #   steps:
-  #     - name: Checkout this repository
-  #       uses: actions/checkout@v4
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v4
 
-  #     - name: Deploy Pages
-  #       id: deployment
-  #       uses: actions/deploy-pages@v4
-  #       with:
-  #         artifact_name: artifact-${{ matrix.os }}-${{ matrix.python-version }}
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: artifact
