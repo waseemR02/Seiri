@@ -1,5 +1,5 @@
 import csv
-from openpyxl import Workbook
+from openpyxl import Workbook, load_workbook
 from loguru import logger
 import sys
 
@@ -68,6 +68,22 @@ class Transform:
         self.wb.save(out_file)
         self.logger.info(f"Saving workbook to {out_file}")
 
+    def xlsx_to_csv(self, in_file: str, out_file: str) -> None:
+        # initialize workbook
+        wb = load_workbook(in_file)
+        wb.sheetnames
+        self.logger.success(f"Loaded {in_file}")
+
+        # initialize csv writer
+        csv_file = open(out_file, "w", newline="")
+        csv_writer = csv.writer(csv_file, delimiter=";")
+
+        # write headers "Section Number;Entry Number;Reference;(default);en;de;es;fr;it;Review ". Some of the headers are from self.langs so iterate over them as well
+        headers = ["Section Number", "Entry Number", "Reference", "(default)"]
+        headers.extend(self.langs)
+        headers.append("Review")
+        csv_writer.writerow(headers)
+
 
 if __name__ == "__main__":
     import argparse
@@ -96,3 +112,10 @@ if __name__ == "__main__":
         input = args["cx"]
 
         transformer.csv_to_xlsx(input, output)
+
+    if args["xc"]:
+        # xlsx to csv
+        output = args["xc"][:-4] + "csv" if not args["output"] else args["output"]
+        input = args["xc"]
+
+        transformer.xlsx_to_csv(input, output)
