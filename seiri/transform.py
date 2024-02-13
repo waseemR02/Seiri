@@ -115,9 +115,8 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--cx", type=str, help="Convert csv to xlsx")
     ap.add_argument("-o", "--output", required=False, type=str, help="output file")
-    ap.add_argument(
-        "--xc", type=str, default="tests/Sample.xlsx", help="Convert xlsx to csv"
-    )
+    ap.add_argument("--xc", type=str, help="Convert xlsx to csv")
+
     ap.add_argument(
         "--log",
         type=str,

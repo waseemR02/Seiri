@@ -174,13 +174,13 @@ if __name__ == "__main__":
     ap.add_argument(
         "in_xlsx",
         type=str,
-        default="tests/Delivered.xlsx",
+        default="tests/data/Delivered_correct.xlsx",
         help="path to xlsx to validate",
     )
     ap.add_argument(
         "--against",
         type=str,
-        default="tests/Sample.xlsx",
+        default="tests/data/Sample.xlsx",
         help="path to xlsx to validate against",
     )
 

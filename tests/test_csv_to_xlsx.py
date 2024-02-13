@@ -13,7 +13,7 @@ def test_csv_to_xlsx(tmp_path):
     transformer = Transform(log=str(log_file))
 
     # Call the csv_to_xlsx method
-    transformer.csv_to_xlsx("tests/Sample.csv", str(output_file))
+    transformer.csv_to_xlsx("tests/data/Sample.csv", str(output_file))
 
     # Check if the output file exists
     assert output_file.exists()
@@ -22,7 +22,7 @@ def test_csv_to_xlsx(tmp_path):
     wb = openpyxl.load_workbook(output_file)
 
     # Load the sample file
-    sample_file = "tests/Sample.xlsx"
+    sample_file = "tests/data/Sample.xlsx"
     sample_wb = openpyxl.load_workbook(sample_file)
 
     # Check if the workbook contains the expected sheets

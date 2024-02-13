@@ -2,11 +2,8 @@ from seiri.validate import Validate
 
 
 def test_validate_correct(tmp_path):
-    # Create a temporary input file path
-    input_file = "tests/Delivered_correct.xlsx"
-
-    # Create a temporary against file path
-    against_file = "tests/Sample.xlsx"
+    input_file = "tests/data/Delivered_correct.xlsx"
+    against_file = "tests/data/Sample.xlsx"
 
     # Create a temporary log file path
     log_file = tmp_path / "seiri-error.log"
@@ -25,11 +22,8 @@ def test_validate_correct(tmp_path):
 
 
 def test_validate_incorrect(tmp_path):
-    # Create a temporary input file path
-    input_file = "tests/Delivered_incorrect.xlsx"
-
-    # Create a temporary against file path
-    against_file = "tests/Sample.xlsx"
+    input_file = "tests/data/Delivered_incorrect.xlsx"
+    against_file = "tests/data/Sample.xlsx"
 
     # Create a temporary log file path
     log_file = tmp_path / "seiri-error.log"
