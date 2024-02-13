@@ -75,7 +75,7 @@ jobs:
           path: ./coverage
 
   deploy:
-    needs: main
+    needs: merge-artifacts
     runs-on: ubuntu-latest
 
     permissions:
