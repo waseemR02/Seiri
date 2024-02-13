@@ -1,0 +1,7 @@
+Section Number;Entry Number;Reference;(default);en;de;es;fr;it;Review
+0;0;lbl_m_access_level;;Access Level;dfs;dsffd;fdds;dsf;
+0;0;lbl_access_level_1;;Standard;dfd;fdsdf;dsfd;sdffsd;
+0;0;lbl_access_level_2;;Extended;df;dfdsf;sdffsd;sdffdsd;
+0;0;lbl_access_level_4;;Service;gf;dfs;fdsdf;sdffdse;
+0;0;lbl_Reserved;;Reserved;jg;dfdsfe;fdf;weer;
+0;0;label_Expert_List;;Expert List;kjk;dfsfd;dsffsd;dfgf;
