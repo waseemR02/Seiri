@@ -52,7 +52,7 @@ jobs:
           path: ./htmlcov
 
   deploy:
-    needs: build
+    needs: main
     runs-on: ubuntu-latest
 
     permissions:
