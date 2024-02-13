@@ -87,14 +87,14 @@ jobs:
           echo '  <a href="artifact-ubuntu-latest-3.10/" class="button">Ubuntu - Python 3.10</a>' >> index.html
           echo '  <a href="artifact-ubuntu-latest-3.11/" class="button">Ubuntu - Python 3.11</a>' >> index.html
           echo '  <a href="artifact-ubuntu-latest-3.12/" class="button">Ubuntu - Python 3.12</a>' >> index.html
-          echo '  <a href="artifact-macOS-latest-3.9/" class="button">MacOS - Python 3.10</a>' >> index.html
-          echo '  <a href="artifact-macOS-latest-3.10/" class="button">MacOS - Python 3.11</a>' >> index.html
-          echo '  <a href="artifact-macOS-latest-3.11/" class="button">MacOS - Python 3.10</a>' >> index.html
-          echo '  <a href="artifact-macOS-latest-3.12/" class="button">MacOS - Python 3.11</a>' >> index.html
-          echo '  <a href="artifact-windows-latest-3.9/" class="button">Windows - Python 3.10</a>' >> index.html
-          echo '  <a href="artifact-windows-latest-3.10/" class="button">Windows - Python 3.11</a>' >> index.html
-          echo '  <a href="artifact-windows-latest-3.11/" class="button">Windows - Python 3.9</a>' >> index.html
-          echo '  <a href="artifact-windows-latest-3.12/" class="button">Windows - Python 3.10</a>' >> index.html
+          echo '  <a href="artifact-macOS-latest-3.9/" class="button">MacOS - Python 3.9</a>' >> index.html
+          echo '  <a href="artifact-macOS-latest-3.10/" class="button">MacOS - Python 3.10</a>' >> index.html
+          echo '  <a href="artifact-macOS-latest-3.11/" class="button">MacOS - Python 3.11</a>' >> index.html
+          echo '  <a href="artifact-macOS-latest-3.12/" class="button">MacOS - Python 3.12</a>' >> index.html
+          echo '  <a href="artifact-windows-latest-3.9/" class="button">Windows - Python 3.9</a>' >> index.html
+          echo '  <a href="artifact-windows-latest-3.10/" class="button">Windows - Python 3.10</a>' >> index.html
+          echo '  <a href="artifact-windows-latest-3.11/" class="button">Windows - Python 3.11</a>' >> index.html
+          echo '  <a href="artifact-windows-latest-3.12/" class="button">Windows - Python 3.12</a>' >> index.html
           echo '</body>' >> index.html
           echo '</html>' >> index.html
           cd ..
