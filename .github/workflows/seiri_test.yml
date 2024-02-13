@@ -73,25 +73,28 @@ jobs:
           echo '<html lang="en">' >> index.html
           echo '<head>' >> index.html
           echo '  <meta charset="UTF-8">' >> index.html
-          echo '  <title>Artifacts</title>' >> index.html
+          echo '  <title>Coverage</title>' >> index.html
           echo '  <style>' >> index.html
-          echo '    body { background-color: black; color: white; }' >> index.html
-          echo '    .button { background-color: white; color: black; margin: 10px; padding: 10px; text-decoration: none; }' >> index.html
+          echo '    body { background-color: #333333; color: white; }' >> index.html
+          echo '    .button { background-color: #555555; color: white; margin: 20px; padding: 20px; text-decoration: none; display: block; border-radius: 5px; }' >> index.html
+          echo '    .button:hover { background-color: #777777; }' >> index.html
+          echo '    .coverage { background-color: #222222; color: white; padding: 10px; border-radius: 5px; }' >> index.html
           echo '  </style>' >> index.html
           echo '</head>' >> index.html
           echo '<body>' >> index.html
+          echo '  <h1>Coverage Results</h1>' >> index.html
           echo '  <a href="artifact-ubuntu-latest-3.9/" class="button">Ubuntu - Python 3.9</a>' >> index.html
           echo '  <a href="artifact-ubuntu-latest-3.10/" class="button">Ubuntu - Python 3.10</a>' >> index.html
           echo '  <a href="artifact-ubuntu-latest-3.11/" class="button">Ubuntu - Python 3.11</a>' >> index.html
           echo '  <a href="artifact-ubuntu-latest-3.12/" class="button">Ubuntu - Python 3.12</a>' >> index.html
           echo '  <a href="artifact-macOS-latest-3.9/" class="button">MacOS - Python 3.10</a>' >> index.html
-          echo '  <a href="artifact-macOS-latest-3.10/" class="button">MacOS - Python 3.11</a>' >> index.html          echo '  <a href="artifact-ubuntu-latest-3.9/" class="button">Ubuntu - Python 3.9</a>' >> index.html
+          echo '  <a href="artifact-macOS-latest-3.10/" class="button">MacOS - Python 3.11</a>' >> index.html
           echo '  <a href="artifact-macOS-latest-3.11/" class="button">MacOS - Python 3.10</a>' >> index.html
-          echo '  <a href="artifact-macOS-latest-3.12/" class="button">MacOS - Python 3.11</a>' >> index.html          echo '  <a href="artifact-ubuntu-latest-3.9/" class="button">Ubuntu - Python 3.9</a>' >> index.html
-          echo '  <a href="artifact-windows-latest-3.9/" class="button">windows - Python 3.10</a>' >> index.html
-          echo '  <a href="artifact-windows-latest-3.10/" class="button">windows - Python 3.11</a>' >> index.html
-          echo '  <a href="artifact-windows-latest-3.11/" class="button">windows - Python 3.9</a>' >> index.html
-          echo '  <a href="artifact-windows-latest-3.12/" class="button">windows - Python 3.10</a>' >> index.html
+          echo '  <a href="artifact-macOS-latest-3.12/" class="button">MacOS - Python 3.11</a>' >> index.html
+          echo '  <a href="artifact-windows-latest-3.9/" class="button">Windows - Python 3.10</a>' >> index.html
+          echo '  <a href="artifact-windows-latest-3.10/" class="button">Windows - Python 3.11</a>' >> index.html
+          echo '  <a href="artifact-windows-latest-3.11/" class="button">Windows - Python 3.9</a>' >> index.html
+          echo '  <a href="artifact-windows-latest-3.12/" class="button">Windows - Python 3.10</a>' >> index.html
           echo '</body>' >> index.html
           echo '</html>' >> index.html
           cd ..
