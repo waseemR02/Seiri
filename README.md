@@ -39,23 +39,27 @@ options:
 **Example:**
 
 ```
-python seiri/transform.py --cx tests/Sample.csv -o sample.xlsx --verbose
+python seiri/transform.py --cx tests/data/Sample.csv -o sample.xlsx --verbose
 ```
 ![csv_to_xlsx](https://github.com/waseemR02/seiri/assets/98299006/2443b91d-643e-4a5e-bae5-85eeb2abea94)
 -----------------
 ```
-python seiri/validate.py tests/Delivered_correct.xlsx
+python seiri/validate.py tests/data/Delivered_correct.xlsx
 ```
 ![validation](https://github.com/waseemR02/seiri/assets/98299006/e47adcf2-cc07-4379-ba20-72016fc1fed3)
+```
+python seiri/transform.py --xc tests/data/Delivered_correct.xlsx -o sample.csv  --verbose
+```
+![xlsx_to_csv](https://github.com/waseemR02/seiri/assets/98299006/00f1b512-02c2-46f8-8240-161ff2485041)
 
 ### Testing
 Run the following
 ```
 pytest -v
 ```
-![pytest](https://github.com/waseemR02/seiri/assets/98299006/330669ab-2197-4758-8efd-afe452c9616e)
+![pytest](https://github.com/waseemR02/seiri/assets/98299006/ff25e827-3550-4be3-86e0-4ca0ca470a70)
 
 ## Task
 - [x] Convert csv to xlsx
 - [x] Validating given Excel with rules
-- [ ] Converting Excel to csv again
+- [x] Converting Excel to csv again
