@@ -42,10 +42,8 @@ jobs:
           coverage report -m
             coverage html -d ${{ matrix.os }}-${{ matrix.python-version }}
 
-
-
-      - name: Upload Page Artifacts
-        uses: actions/upload-artifact@v4
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
         with:
           name: artifact-${{ matrix.os }}-${{ matrix.python-version }}
           path: ./${{ matrix.os }}-${{ matrix.python-version }}
@@ -64,6 +62,10 @@ jobs:
         with:
           path: ./coverage
 
+      - name: List down all coverage artifacts
+        run: |
+          ls -R ./coverage
+
       - name: Setup Pages
         if: github.ref == 'refs/heads/main'
         uses: actions/configure-pages@v4
@@ -74,24 +76,24 @@ jobs:
           name: artifact
           path: ./coverage
 
-  deploy:
-    needs: merge-artifacts
-    runs-on: ubuntu-latest
+  # deploy:
+  #   needs: merge-artifacts
+  #   runs-on: ubuntu-latest
 
-    permissions:
-      pages: write
-      id-token: write
+  #   permissions:
+  #     pages: write
+  #     id-token: write
 
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  #   environment:
+  #     name: github-pages
+  #     url: ${{ steps.deployment.outputs.page_url }}
 
-    steps:
-      - name: Checkout this repository
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Checkout this repository
+  #       uses: actions/checkout@v4
 
-      - name: Deploy Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-        with:
-          artifact_name: artifact
+  #     - name: Deploy Pages
+  #       id: deployment
+  #       uses: actions/deploy-pages@v4
+  #       with:
+  #         artifact_name: artifact
