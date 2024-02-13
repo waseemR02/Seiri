@@ -55,6 +55,11 @@ jobs:
   deploy:
     needs: main
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
 
     permissions:
       pages: write
@@ -71,3 +76,5 @@ jobs:
       - name: Deploy Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        inputs:
+          artifact_name: artifact-${{ matrix.os }}-${{ matrix.python-version }}
