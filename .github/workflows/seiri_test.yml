@@ -52,29 +52,52 @@ jobs:
           name: artifact-${{ matrix.os }}-${{ matrix.python-version }}
           path: ./${{ matrix.os }}-${{ matrix.python-version }}
 
-  deploy:
-    needs: main
+  merge-artifacts:
+    name: Merge Artifacts
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
-        os: [ubuntu-latest, macOS-latest, windows-latest]
-
-    permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    needs: main
 
     steps:
       - name: Checkout this repository
         uses: actions/checkout@v4
 
-      - name: Deploy Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Merge Artifacts
+        uses: actions/download-artifact@v3
         with:
-          artifact_name: artifact-${{ matrix.os }}-${{ matrix.python-version }}
+          path: ./artifacts
+
+      - name: Display structure of downloaded files
+        run: ls -R
+
+      # - name: Upload Artifacts
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: artifacts
+      #     path: ./artifacts
+
+  # deploy:
+  #   needs: main
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       python-version: ["3.9", "3.10", "3.11", "3.12"]
+  #       os: [ubuntu-latest, macOS-latest, windows-latest]
+
+  #   permissions:
+  #     pages: write
+  #     id-token: write
+
+  #   environment:
+  #     name: github-pages
+  #     url: ${{ steps.deployment.outputs.page_url }}
+
+  #   steps:
+  #     - name: Checkout this repository
+  #       uses: actions/checkout@v4
+
+  #     - name: Deploy Pages
+  #       id: deployment
+  #       uses: actions/deploy-pages@v4
+  #       with:
+  #         artifact_name: artifact-${{ matrix.os }}-${{ matrix.python-version }}
