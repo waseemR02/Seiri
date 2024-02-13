@@ -77,12 +77,36 @@ class Transform:
         # initialize csv writer
         csv_file = open(out_file, "w", newline="")
         csv_writer = csv.writer(csv_file, delimiter=";")
+        self.logger.info(f"Writing to {out_file}")
 
         # write headers "Section Number;Entry Number;Reference;(default);en;de;es;fr;it;Review ". Some of the headers are from self.langs so iterate over them as well
         headers = ["Section Number", "Entry Number", "Reference", "(default)"]
         headers.extend(self.langs)
         headers.append("Review")
         csv_writer.writerow(headers)
+        self.logger.success(f"Headers written to {out_file}")
+
+        # Write rows to csv
+        # each row looks like this
+        # 0;0;lbl_m_access_level;;Access Level;sdfk;ryt;df;g;
+
+        for row in range(2, wb["en"].max_row + 1):
+            row_to_append = [
+                0,
+                0,
+                wb["en"].cell(row=row, column=1).value,
+                "",
+            ]
+            for sheet in wb.sheetnames:
+                row_to_append.append(wb[sheet].cell(row=row, column=2).value)
+            row_to_append.append("")
+
+            csv_writer.writerow(row_to_append)
+        self.logger.success(f"Rows written to {out_file}")
+
+        # close csv file
+        csv_file.close()
+        self.logger.success(f"Successfully converted {in_file} to {out_file}")
 
 
 if __name__ == "__main__":
