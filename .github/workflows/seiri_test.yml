@@ -45,7 +45,7 @@ jobs:
 
 
       - name: Upload Page Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: artifact-${{ matrix.os }}-${{ matrix.python-version }}
           path: ./${{ matrix.os }}-${{ matrix.python-version }}
@@ -69,7 +69,7 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: Upload page Artifacts
-        uses: actions/upload-page-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           name: artifact
           path: ./coverage
