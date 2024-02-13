@@ -66,6 +66,27 @@ jobs:
         run: |
           ls -R ./coverage
 
+      - name: Create and deploy index.html
+        run: |
+          cd coverage
+          echo '<!DOCTYPE html>' > index.html
+          echo '<html lang="en">' >> index.html
+          echo '<head>' >> index.html
+          echo '  <meta charset="UTF-8">' >> index.html
+          echo '  <title>Artifacts</title>' >> index.html
+          echo '  <style>' >> index.html
+          echo '    body { background-color: black; color: white; }' >> index.html
+          echo '    .button { background-color: white; color: black; margin: 10px; padding: 10px; text-decoration: none; }' >> index.html
+          echo '  </style>' >> index.html
+          echo '</head>' >> index.html
+          echo '<body>' >> index.html
+          echo '  <a href="artifact-ubuntu-latest-3.9/" class="button">Artifact 3.9</a>' >> index.html
+          echo '  <a href="artifact-ubuntu-latest-3.10/" class="button">Artifact 3.10</a>' >> index.html
+          echo '  <a href="artifact-ubuntu-latest-3.11/" class="button">Artifact 3.11</a>' >> index.html
+          echo '</body>' >> index.html
+          echo '</html>' >> index.html
+          cd ..
+
       - name: Setup Pages
         if: github.ref == 'refs/heads/main'
         uses: actions/configure-pages@v4
