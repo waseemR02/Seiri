@@ -63,3 +63,4 @@ pytest -v
 - [x] Convert csv to xlsx
 - [x] Validating given Excel with rules
 - [x] Converting Excel to csv again
+- [ ] Add Spell check on `en` column
