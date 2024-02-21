@@ -41,16 +41,16 @@ options:
 **Example:**
 
 ```
-python seiri/transform.py --cx tests/data/Sample.csv -o sample.xlsx --verbose
+python -m seiri.transform --cx tests/data/Sample.csv -o sample.xlsx --verbose
 ```
 ![csv_to_xlsx](https://github.com/waseemR02/seiri/assets/98299006/2443b91d-643e-4a5e-bae5-85eeb2abea94)
 -----------------
 ```
-python seiri/validate.py tests/data/Delivered_correct.xlsx
+python -m seiri.validate tests/data/Delivered_correct.xlsx
 ```
 ![validation](https://github.com/waseemR02/seiri/assets/98299006/e47adcf2-cc07-4379-ba20-72016fc1fed3)
 ```
-python seiri/transform.py --xc tests/data/Delivered_correct.xlsx -o sample.csv  --verbose
+python -m seiri.transform --xc tests/data/Delivered_correct.xlsx -o sample.csv  --verbose
 ```
 ![xlsx_to_csv](https://github.com/waseemR02/seiri/assets/98299006/00f1b512-02c2-46f8-8240-161ff2485041)
 
