@@ -1,6 +1,8 @@
 import csv
 from openpyxl import Workbook, load_workbook
 from loguru import logger
+import pkg_resources
+from symspellpy import SymSpell
 import sys
 
 
@@ -36,6 +38,18 @@ class Transform:
         # default langs for now
         self.langs = ["en", "de", "es", "fr", "it"]
 
+        # Intialize spell checker
+        self.sym_spell = SymSpell(max_dictionary_edit_distance=2, prefix_length=7)
+        dictionary_path = pkg_resources.resource_filename(
+            "symspellpy", "frequency_dictionary_en_82_765.txt"
+        )
+        bigram_path = pkg_resources.resource_filename(
+            "symspellpy", "frequency_bigramdictionary_en_243_342.txt"
+        )
+
+        self.sym_spell.load_dictionary(dictionary_path, term_index=0, count_index=1)
+        self.sym_spell.load_bigram_dictionary(bigram_path, term_index=0, count_index=2)
+
     def __init__sheets(self) -> None:
         # Create worksheets
         for lang in self.langs:
@@ -50,20 +64,24 @@ class Transform:
     def csv_to_xlsx(self, in_file: str, out_file: str) -> None:
         Listed_csv = csv.reader(open(in_file, "r", newline=""), delimiter=";")
 
-        # Checks
-        header_list = Listed_csv.__next__()
-
-        if header_list[4] != "en":
-            self.logger.error("'en' Spell check error!!")
-        else:
-            self.logger.success("'en' Spell check done")
+        Listed_csv.__next__()
 
         self.__init__sheets()
-
+        self.logger.info("Spell checking column 'en'")
         for row in Listed_csv:
             if len(row):  # Don't consider empty lines
-                self.sheets[0].append([row[2], row[4]])
+                ## Spell check
+                suggestions = self.sym_spell.lookup_compound(
+                    row[4], max_edit_distance=2, transfer_casing=True
+                )
+                if suggestions:
+                    if suggestions[0].term != row[4]:
+                        self.logger.error(
+                            f"Spelling mistake found in {row[4]} : Suggestions: {suggestions[0].term}"
+                        )
 
+                self.sheets[0].append([row[2], row[4]])
+        self.logger.success("Spell checked column 'en'")
         # Save Workbook
         self.wb.save(out_file)
         self.logger.info(f"Saving workbook to {out_file}")
