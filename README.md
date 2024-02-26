@@ -15,7 +15,7 @@ This tool is written as library for future adaptation to gui
 But each class file can be run as a separate script
 **Transform**
 ```
-usage: transform.py [-h] [--cx CX] [-o OUTPUT] [--xc XC] [-v]
+usage: transform.py [-h] [--cx CX] [-o OUTPUT] [--xc XC] [--log LOG] [-v]
 
 options:
   -h, --help            show this help message and exit
@@ -23,12 +23,13 @@ options:
   -o OUTPUT, --output OUTPUT
                         output file
   --xc XC               Convert xlsx to csv
+  --log LOG             path to log file
   -v, --verbose
 ```
 
 **Validate**
 ```
-usage: validate.py [-h] [--against AGAINST] in_xlsx
+usage: validate.py [-h] [--against AGAINST] [--log LOG] in_xlsx
 
 positional arguments:
   in_xlsx            path to xlsx to validate
@@ -36,8 +37,8 @@ positional arguments:
 options:
   -h, --help         show this help message and exit
   --against AGAINST  path to xlsx to validate against
+  --log LOG          path to log file
 ```
-
 **Example:**
 
 ```
@@ -65,4 +66,4 @@ pytest -v
 - [x] Convert csv to xlsx
 - [x] Validating given Excel with rules
 - [x] Converting Excel to csv again
-- [ ] Add Spell check on `en` column
+- [x] Add Spell check on `en` column
