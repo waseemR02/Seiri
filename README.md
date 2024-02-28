@@ -1,4 +1,5 @@
 # Seiri
+[![tests](https://github.com/waseemr02/seiri/actions/workflows/seiri_test.yml/badge.svg?branch=main)](https://github.com/waseemr02/seiri/actions/workflows/seiri_test.yml)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/2543d30ee224499a91a09b5c04b10454)](https://app.codacy.com/gh/waseemR02/seiri/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 Tool for csv<->xlsx conversions and validation checks
