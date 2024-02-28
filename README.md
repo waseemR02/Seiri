@@ -7,7 +7,7 @@ Tool for csv<->xlsx conversions and validation checks
 ## Installation
 Create a virtual environment before installing dependencies
 ```
-pip install -r requirements.txt
+pip install .
 ```
 
 ## Usage
@@ -57,6 +57,11 @@ python -m seiri.transform --xc tests/data/Delivered_correct.xlsx -o sample.csv  
 ![xlsx_to_csv](https://github.com/waseemR02/seiri/assets/98299006/00f1b512-02c2-46f8-8240-161ff2485041)
 
 ### Testing
+Install the testing dependencies
+```bash
+pip install .[test]
+```
+
 Run the following
 ```
 pytest -v
