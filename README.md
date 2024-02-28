@@ -58,7 +58,7 @@ python -m seiri.transform --xc tests/data/Delivered_correct.xlsx -o sample.csv  
 
 ### Testing
 Install the testing dependencies
-```bash
+```
 pip install .[test]
 ```
 
