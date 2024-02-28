@@ -52,12 +52,12 @@ jobs:
     steps:
       - name: Checkout this repository
         uses: actions/checkout@v4
-        
+
       - name: Set up Python 3.12
         uses: actions/setup-python@v4
         with:
           python-version: "3.12"
-  
+
       - name: Download coverage files
         uses: actions/download-artifact@v3
         with:
@@ -73,10 +73,11 @@ jobs:
         run: |
           pip install coverage
           coverage combine coverage
+          coverage xml
           coverage report
-          
+
       - name: Push Coverage results
         uses: codacy/codacy-coverage-reporter-action@v1
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          coverage-reports: coverage
+          coverage-reports: coverage.xml
