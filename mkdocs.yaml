@@ -1,7 +1,7 @@
 site_name: Seiri
 site_description: Automation Tool for csv<->xlsx transforms
 site_author: Waseem Riaz
-copyright: Copyright &copy; 2023 Waseem Riaz
+copyright: Copyright &copy; 2024 Waseem Riaz
 site_url: https://waseemr02.github.io/seiri
 repo_url: https://github.com/waseemr02/seiri
 repo_name: waseemr02/seiri
