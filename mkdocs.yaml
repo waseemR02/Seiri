@@ -1,0 +1,92 @@
+site_name: Seiri
+site_description: Automation Tool for csv<->xlsx transforms
+site_author: Waseem Riaz
+copyright: Copyright &copy; 2024 Waseem Riaz
+site_url: https://waseemr02.github.io/seiri
+repo_url: https://github.com/waseemr02/seiri
+repo_name: waseemr02/seiri
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/lightbulb-outline
+        name: "Switch to dark mode"
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/lightbulb
+        name: "Switch to light mode"
+
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+  features:
+    - content.code.copy # the copy-to-clipboard buttons for code blocks
+    - content.action.view # view source button for pages
+    - navigation.footer # the previous and next buttons in the footer
+    - navigation.indexes # allow mother pages to have their own index pages
+    # - navigation.tabs # render classical type of navbar at top
+    - navigation.instant # instant navigation for faster page loads
+    - navigation.instant.prefetch # prefetch pages for instant navigation
+    - navigation.instant.progress # show progress bar for instant navigation
+    - navigation.top # back to top button
+    - search.highlight # highlight search results after going to a page
+    - search.suggest # show search suggestions while typing
+    - toc.follow # if toc sidebar doesn't fit, scroll to the active heading
+
+nav:
+  - Overview: index.md
+  # - User Guide: user_guide.md
+  - Reference:
+      - Reference: reference/index.md
+      - transform.py: reference/transform.md
+      - validate.py: reference/validate.md
+  - Changelog: changelog.md
+
+markdown_extensions:
+  # see https://facelessuser.github.io/pymdown-extensions/extensions/inlinehilite/ for more pymdownx info
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed: # content tabs
+      alternate_style: true
+  - toc:
+      permalink: true
+      title: Page contents
+  - admonition # blocks like note, warning, tip, etc.
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths:
+            - seiri
+          options:
+            members_order: source
+            show_bases: true
+            docstring_section_style: list
+            merge_init_into_class: true
+            show_docstring_attributes: true
+            docstring_style: google
+
+extra_javascript:
+  - assets/javascripts/katex.js
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js
+
+extra_css:
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css

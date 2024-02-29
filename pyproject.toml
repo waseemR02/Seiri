@@ -34,6 +34,11 @@ classifiers = [
 
 
 [project.optional-dependencies]
+docs = [
+    "mkdocs-material==9.5.9",      # to build docs
+    "mkdocstrings-python==1.8.0",  # to build reference documentation from docstrings
+]
+
 test = [
   'pytest==8.0.0',
   'coverage==7.4.1',

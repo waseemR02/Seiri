@@ -10,6 +10,13 @@ class Validate:
     """
 
     def __init__(self, log: str = "seiri-error.log") -> None:
+        """
+        Args:
+            log (str): path to log file
+
+        Returns:
+            None
+        """
         # Initialize logger with default settings
         self.logger = logger
         self.logger.remove()
@@ -24,8 +31,26 @@ class Validate:
         )
 
     def validate(self, in_xlsx: str, against_xlsx: str) -> bool:
-        """
-        Validate checks given xlsx against given rules
+        """The following checks are performed:
+            1. Check if both excel book:
+
+                a. row count is same in the en sheet
+
+                b. key and value order is same
+
+            2. Check if all sheets in the in_xlsx have same row count
+            3. The “en” sheet key should be available and match in all other sheets
+            4. The “en” sheet key order should atch in all other sheets
+            5. The value text in all other sheets should not be empty
+            6. The text in value column in all sheets should be unique
+            7. Check if the string length of value column in all sheets is less than the string length if value column in en sheet
+
+        Args:
+            in_xlsx (str): path to xlsx to validate
+            against_xlsx (str): path to xlsx to validate against
+
+        Returns:
+            bool: True if all guards pass
         """
         # Return True if all guards pass
         ret = True
