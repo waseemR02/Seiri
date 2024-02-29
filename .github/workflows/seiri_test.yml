@@ -1,4 +1,4 @@
-name: seiri_test
+name: Test Seiri
 
 on:
   push:
