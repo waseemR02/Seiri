@@ -1,3 +1,7 @@
+"""
+This contains base class `Transform` which holds transforms for csv to xlsx and vice-versa along with spell check as mentioned in the [Problem Statement](https://github.com/waseemR02/seiri/releases/download/v1.0.0/Problem.Details.7z)
+"""
+
 import csv
 from openpyxl import Workbook, load_workbook
 from loguru import logger
@@ -7,13 +11,28 @@ import sys
 
 
 class Transform:
-    """
-    Transform contains methods for converting
-        1. csv  --> xlsx
-        2. xlsx --> csv
+    """Transform contains methods for converting:
+
+    1. csv  $\dashrightarrow$ xlsx
+    2. xlsx $\dashrightarrow$ csv
     """
 
     def __init__(self, verbose: bool = False, log: str = "seiri-error.log") -> None:
+        """It initializes the following things
+
+        - Loguru
+        - Workbooks
+        - Defaults Languages
+        - Symspell Dictionary
+        """
+        """
+        Args:
+            verbose (bool): To enable verbose logs
+            log (str): path to log file
+
+        Returns:
+            None
+        """
         # Initialize logger for default logging
         self.logger = logger
         self.logger.remove()
@@ -51,7 +70,9 @@ class Transform:
         self.sym_spell.load_bigram_dictionary(bigram_path, term_index=0, count_index=2)
 
     def __init__sheets(self) -> None:
-        # Create worksheets
+        """
+        Create worksheets from self.lang and appends ` Key | Value ` columns
+        """
         for lang in self.langs:
             self.sheets.append(self.wb.create_sheet(lang))
             self.logger.info(f"Created sheet {lang}")
@@ -62,6 +83,15 @@ class Transform:
         self.logger.success("Successfully initialized Sheets")
 
     def csv_to_xlsx(self, in_file: str, out_file: str) -> None:
+        """Converts csv to xlsx and checks for spelling mistakes in the `en` column
+
+        Args:
+            in_file (str): path to input file
+            out_file (str): path to output file
+
+        Returns:
+            None
+        """
         Listed_csv = csv.reader(open(in_file, "r", newline=""), delimiter=";")
 
         Listed_csv.__next__()
@@ -87,6 +117,15 @@ class Transform:
         self.logger.info(f"Saving workbook to {out_file}")
 
     def xlsx_to_csv(self, in_file: str, out_file: str) -> None:
+        """Converts xlsx to csv
+
+        Args:
+            in_file (str): path to input file
+            out_file (str): path to output file
+
+        Returns:
+            None
+        """
         # initialize workbook
         wb = load_workbook(in_file)
         wb.sheetnames
